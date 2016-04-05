@@ -67,8 +67,8 @@
     <div class="form-group">
         <label for="treatment">Treatment Given</label>
         @defining(treatmentTab.getTabFieldItemByName(null, "treatment")) { treatment =>
-            <input name="tabFieldItems[@treatment.getIndex].name" type="text" class="hidden" value="treatment" placeholder="treatment given"/>
-            <textarea rows="3" name="tabFieldItems[@treatment.getIndex].value" class="form-control input-sm">@treatment.getValue</textarea>
+            <input name="tabFieldItems[@treatment.getIndex].name" type="text" class="hidden" value="treatment"/>
+            <textarea rows="3" name="tabFieldItems[@treatment.getIndex].value" placeholder= "Treatment Given" class="form-control input-sm">@treatment.getValue</textarea>
         }
     </div>
 </div>
