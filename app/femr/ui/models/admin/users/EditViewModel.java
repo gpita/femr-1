@@ -48,8 +48,8 @@ public class EditViewModel {
             errors.add(new ValidationError("email", "email is a required field"));
         if (!newPassword.equals(newPasswordVerify))
             errors.add(new ValidationError("newPassword", "passwords do not match"));
-        else if(newPassword.isEmpty() || newPasswordVerify.isEmpty())
-            errors.add(new ValidationError("newPassword", "password field is empty"));
+        //else if(newPassword.isEmpty() || newPasswordVerify.isEmpty())
+           // errors.add(new ValidationError("newPassword", "password field is empty"));
         else {
             if(newPassword.length() < 6 || !hasUppercase.matcher(newPassword).find()
                     || !hasNumber.matcher(newPassword).find())      //AJ Saclayan Password Constraints
