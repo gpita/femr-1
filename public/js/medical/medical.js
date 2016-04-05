@@ -66,6 +66,7 @@ var prescriptionFeature = {
         };
     },
     // Only adds typeahead to the last prescription row
+    
     addMedicationTypeahead: function() {
         var $element = prescriptionFeature.allPrescriptions.last().find(".medicationName");
         $element.typeahead({ hint: true, highlight: true },
