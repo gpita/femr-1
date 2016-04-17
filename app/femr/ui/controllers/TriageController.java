@@ -287,19 +287,19 @@ public class TriageController extends Controller {
         if (viewModelPost.getAge() != null) {
             patient.setBirth(viewModelPost.getAge());
             // added by gaby
-             if((viewModelPost.ageNumber(viewModelPost.getAge()) < 2) && (!viewModelPost.getAgeClassification().equals("infant")))
+             if((viewModelPost.ageNumber(viewModelPost.getAge()) >= 0) && (viewModelPost.ageNumber(viewModelPost.getAge()) < 2) && (!viewModelPost.getAgeClassification().equals("infant")))
              {
                   throw new RuntimeException();
              }
-             else if((viewModelPost.ageNumber(viewModelPost.getAge()) < 13) && (!viewModelPost.getAgeClassification().equals("child")))
+             else if((viewModelPost.ageNumber(viewModelPost.getAge()) >= 2) && (viewModelPost.ageNumber(viewModelPost.getAge()) < 13) && (!viewModelPost.getAgeClassification().equals("child")))
              {
                    throw new RuntimeException();
              }
-             else if((viewModelPost.ageNumber(viewModelPost.getAge()) < 18) && (!viewModelPost.getAgeClassification().equals("teen")))
+             else if((viewModelPost.ageNumber(viewModelPost.getAge()) >= 13) && (viewModelPost.ageNumber(viewModelPost.getAge()) < 18) && (!viewModelPost.getAgeClassification().equals("teen")))
              {
                   throw new RuntimeException();
              }
-            else if((viewModelPost.ageNumber(viewModelPost.getAge()) < 65) && (!viewModelPost.getAgeClassification().equals("adult")))
+            else if((viewModelPost.ageNumber(viewModelPost.getAge()) >= 18) && (viewModelPost.ageNumber(viewModelPost.getAge()) < 65) && (!viewModelPost.getAgeClassification().equals("adult")))
              {
                 	throw new RuntimeException();
              }
