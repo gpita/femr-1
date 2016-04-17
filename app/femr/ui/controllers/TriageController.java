@@ -286,6 +286,27 @@ public class TriageController extends Controller {
         patient.setLastName(viewModelPost.getLastName());
         if (viewModelPost.getAge() != null) {
             patient.setBirth(viewModelPost.getAge());
+             // added by gaby
+            if((viewModelPost.getAge() < 2) && (viewModelPost.getAgeClassification() != "infant"))
+            {
+            	throw new RuntimeException();
+            }
+            else if((viewModelPost.getAge() < 13) && (viewModelPost.getAgeClassification() != "child"))
+            {
+            	throw new RuntimeException();
+            }
+            else if((viewModelPost.getAge() < 18) && (viewModelPost.getAgeClassification() != "teen"))
+            {
+            	throw new RuntimeException();
+            }
+            else if((viewModelPost.getAge() < 65) && (viewModelPost.getAgeClassification() != "adult"))
+            {
+            	throw new RuntimeException();
+            }
+            else if((viewModelPost.getAge() >= 65) && (viewModelPost.getAgeClassification() != "elder"))
+            {
+            	throw new RuntimeException();
+            }
         }
         patient.setSex(viewModelPost.getSex());
         patient.setAddress(viewModelPost.getAddress());
