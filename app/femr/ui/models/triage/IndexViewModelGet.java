@@ -38,16 +38,16 @@ public class IndexViewModelGet {
     //system settings
     private SettingItem settings;
     //all possible options for age classification
-    private Map<String,String> possibleAgeClassifications;
+    private Map<String, String> possibleAgeClassifications;
 
     //Hidden Link
     private boolean linkToMedical = false;
 
-    public boolean isLinkToMedical(){
+    public boolean isLinkToMedical() {
         return linkToMedical;
     }
 
-    public void setLinkToMedical(boolean linkToMedical){
+    public void setLinkToMedical(boolean linkToMedical) {
         this.linkToMedical = linkToMedical;
     }
 

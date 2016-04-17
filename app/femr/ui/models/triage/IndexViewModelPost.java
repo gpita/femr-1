@@ -19,9 +19,6 @@
 package femr.ui.models.triage;
 
 import femr.common.models.PatientItem;
-import org.springframework.cglib.core.Local;
-
-import java.time.LocalDate;
 import java.util.Date;
 
 public class IndexViewModelPost {
@@ -241,36 +238,15 @@ public class IndexViewModelPost {
     public void setIsDiabetesScreenPerformed(String isDiabetesScreenPerformed) {
         this.isDiabetesScreenPerformed = isDiabetesScreenPerformed;
     }
-    public Boolean validateAge(Date age, String classification)
+
+    public int ageNumber(Date age)
     {
+        age = getAge();
         Date now = new Date();
         long time = now.getTime() - age.getTime();
         double years = time/3.156e+10;
         int a = (int)Math.floor(years);
 
-        if((a < 2) && (getAgeClassification()!="infant"))
-        {
-            return false;
-        }
-        else if((a < 13) && (a >= 2) && (getAgeClassification()!="child"))
-        {
-            return false;
-        }
-        else if((a >= 13)&&(a < 18) && (getAgeClassification()!="teen"))
-        {
-            return false;
-        }
-        else if((a < 65)&& (a >= 13) && (getAgeClassification()!="adult"))
-        {
-            return false;
-        }
-        else if((a >= 65) && (getAgeClassification()!="elder"))
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return a;
     }
 }
