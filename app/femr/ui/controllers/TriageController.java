@@ -240,7 +240,7 @@ public class TriageController extends Controller {
 		 if (viewModel.getWeeksPregnant() != null) { /*Sam Zanni*/
             newVitals.put("weeksPregnant", viewModel.getWeeksPregnant().floatValue());
         }
-
+		
         ServiceResponse<List<VitalItem>> vitalServiceResponse = vitalService.createPatientEncounterVitalItems(newVitals, currentUser.getId(), patientEncounterItem.getId());
         if (vitalServiceResponse.hasErrors()) {
             throw new RuntimeException();
@@ -286,27 +286,6 @@ public class TriageController extends Controller {
         patient.setLastName(viewModelPost.getLastName());
         if (viewModelPost.getAge() != null) {
             patient.setBirth(viewModelPost.getAge());
-             // added by gaby
-            if((viewModelPost.ageNumber(viewModelPost.getAge()) < 2) && (!viewModelPost.getAgeClassification().equals("infant")))
-            {
-               	throw new RuntimeException();
-            }
-            else if((viewModelPost.ageNumber(viewModelPost.getAge()) < 13) && (!viewModelPost.getAgeClassification().equals("child")))
-            {
-               	throw new RuntimeException();
-            }
-            else if((viewModelPost.ageNumber(viewModelPost.getAge()) < 18) && (!viewModelPost.getAgeClassification().equals("teen")))
-            {
-              	throw new RuntimeException();
-            }
-            else if((viewModelPost.ageNumber(viewModelPost.getAge()) < 65) && (!viewModelPost.getAgeClassification().equals("adult")))
-            {
-               	throw new RuntimeException();
-            }
-            else if((viewModelPost.ageNumber(viewModelPost.getAge()) >= 65) && (!viewModelPost.getAgeClassification().equals("elder")))
-            {
-               	throw new RuntimeException();
-            }
         }
         patient.setSex(viewModelPost.getSex());
         patient.setAddress(viewModelPost.getAddress());
