@@ -292,7 +292,7 @@ public class TriageController extends Controller {
              {
              	if(viewModelPost.getAgeClassification().equals("infant"))
              	{
-               		patient.setAgeClassification(viewModelPost.getAgeClassification());
+               		viewModelPost.setAgeClassification(viewModelPost.getAgeClassification());
              	}
              	else
              	{
@@ -304,7 +304,7 @@ public class TriageController extends Controller {
              {
              	if(viewModelPost.getAgeClassification().equals("child"))
              	{
-               		patient.setAgeClassification(viewModelPost.getAgeClassification());
+               		viewModelPost.setAgeClassification(viewModelPost.getAgeClassification());
              	}
              	else
              	{
@@ -316,7 +316,7 @@ public class TriageController extends Controller {
              {
              	if(viewModelPost.getAgeClassification().equals("teen"))
              	{
-               		patient.setAgeClassification(viewModelPost.getAgeClassification());
+               		viewModelPost.setAgeClassification(viewModelPost.getAgeClassification());
              	}
              	else
              	{
@@ -328,7 +328,7 @@ public class TriageController extends Controller {
              {
              	if(viewModelPost.getAgeClassification().equals("adult"))
              	{
-               		patient.setAgeClassification(viewModelPost.getAgeClassification());
+               		viewModelPost.setAgeClassification(viewModelPost.getAgeClassification());
              	}
              	else
              	{
@@ -340,7 +340,7 @@ public class TriageController extends Controller {
              {
                 if(viewModelPost.getAgeClassification().equals("elder"))
              	{
-               		patient.setAgeClassification(viewModelPost.getAgeClassification());
+               		viewModelPost.setAgeClassification(viewModelPost.getAgeClassification());
              	}
              	else
              	{
