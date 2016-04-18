@@ -287,31 +287,65 @@ public class TriageController extends Controller {
         if (viewModelPost.getAge() != null) {
             patient.setBirth(viewModelPost.getAge());
             // added by gaby
-             if((viewModelPost.ageNumber(viewModelPost.getAge()) >= 0) && (viewModelPost.ageNumber(viewModelPost.getAge()) < 2) && (!viewModelPost.getAgeClassification().equals("infant")))
+            //infant
+             if((viewModelPost.ageNumber(viewModelPost.getAge()) >= 0) && (viewModelPost.ageNumber(viewModelPost.getAge()) < 2))
              {
-                patient.setAgeClassification(viewModelPost.getAgeClassification());
-               	//throw new RuntimeException();
+             	if(viewModelPost.getAgeClassification().equals("infant"))
+             	{
+               		patient.setAgeClassification(viewModelPost.getAgeClassification());
+             	}
+             	else
+             	{
+             		throw new RuntimeException();	
+             	}
              }
-             else if((viewModelPost.ageNumber(viewModelPost.getAge()) >= 2) && (viewModelPost.ageNumber(viewModelPost.getAge()) < 13) && (!viewModelPost.getAgeClassification().equals("child")))
+             // child
+             else if((viewModelPost.ageNumber(viewModelPost.getAge()) >= 2) && (viewModelPost.ageNumber(viewModelPost.getAge()) < 13))
              {
-                patient.setAgeClassification(viewModelPost.getAgeClassification());
-               	//throw new RuntimeException();
+             	if(viewModelPost.getAgeClassification().equals("child"))
+             	{
+               		patient.setAgeClassification(viewModelPost.getAgeClassification());
+             	}
+             	else
+             	{
+             		throw new RuntimeException();	
+             	}
              }
-             else if((viewModelPost.ageNumber(viewModelPost.getAge()) >= 13) && (viewModelPost.ageNumber(viewModelPost.getAge()) < 18) && (!viewModelPost.getAgeClassification().equals("teen")))
+             // teen
+             else if((viewModelPost.ageNumber(viewModelPost.getAge()) >= 13) && (viewModelPost.ageNumber(viewModelPost.getAge()) < 18))
              {
-                patient.setAgeClassification(viewModelPost.getAgeClassification());
-                //throw new RuntimeException();
+             	if(viewModelPost.getAgeClassification().equals("teen"))
+             	{
+               		patient.setAgeClassification(viewModelPost.getAgeClassification());
+             	}
+             	else
+             	{
+               		throw new RuntimeException();
+             	}
              }
-            else if((viewModelPost.ageNumber(viewModelPost.getAge()) >= 18) && (viewModelPost.ageNumber(viewModelPost.getAge()) < 65) && (!viewModelPost.getAgeClassification().equals("adult")))
+            //adult
+            else if((viewModelPost.ageNumber(viewModelPost.getAge()) >= 18) && (viewModelPost.ageNumber(viewModelPost.getAge()) < 65))
              {
-             	patient.setAgeClassification(viewModelPost.getAgeClassification());
-                //throw new RuntimeException();
+             	if(viewModelPost.getAgeClassification().equals("adult"))
+             	{
+               		patient.setAgeClassification(viewModelPost.getAgeClassification());
+             	}
+             	else
+             	{
+               		throw new RuntimeException();
+             	}
              }
-             else if((viewModelPost.ageNumber(viewModelPost.getAge()) >= 65) && (!viewModelPost.getAgeClassification().equals("elder")))
+             // elder
+             else if((viewModelPost.ageNumber(viewModelPost.getAge()) >= 65))
              {
-                   	patient.setAgeClassification(viewModelPost.getAgeClassification());
-                   	//throw new RuntimeException();
-             }
+                if(viewModelPost.getAgeClassification().equals("elder"))
+             	{
+               		patient.setAgeClassification(viewModelPost.getAgeClassification());
+             	}
+             	else
+             	{
+               		throw new RuntimeException();
+             	}
         }
         patient.setSex(viewModelPost.getSex());
         patient.setAddress(viewModelPost.getAddress());
