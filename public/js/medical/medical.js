@@ -9,6 +9,7 @@ var problemFeature = {
         problemFeature.refreshSelectors();
         return problemFeature.newProblems.length;
     },
+
     addProblemField: function () {
         var problemIndex = problemFeature.getNumberOfNonReadonlyProblemFields();
         $('.problem')
@@ -24,17 +25,21 @@ var problemFeature = {
     },
     removeProblemField: function () {
         problemFeature.refreshSelectors();
-        var lastProblem = $(problemFeature.newProblems).last();
+        var lastProblem = $(problemFeature.allProblems).last();
         if ($(problemFeature.newProblems).size() > 1) {
             if (!$(lastProblem).is('[readonly]')) {
                 $(lastProblem).parent().parent().remove();
             }
-        } else {
+        }
+        else {
             if (!$(lastProblem).is('[readonly]')) {
                 $(lastProblem).val('');
             }
         }
     }
+
+
+
 };
 var prescriptionFeature = {
     medicationTypeaheadData: [],

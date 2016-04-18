@@ -19,6 +19,7 @@
 package femr.data.models.mysql;
 
 import femr.data.models.core.IDiagnosis;
+import femr.data.models.core.IUser;
 
 import javax.persistence.*;
 
