@@ -215,7 +215,7 @@ public class TriageController extends Controller {
         }
 
         if (viewModel.getHeightInches() != null) {
-           Float heightInches = viewModel.getHeightInches().floatValue();
+            Float heightInches = viewModel.getHeightInches().floatValue();
             newVitals.put("heightInches", heightInches);
         }
 
@@ -237,10 +237,10 @@ public class TriageController extends Controller {
             newVitals.put("glucose", viewModel.getGlucose().floatValue());
         }
 
-		 if (viewModel.getWeeksPregnant() != null) { /*Sam Zanni*/
+        if (viewModel.getWeeksPregnant() != null) { /*Sam Zanni*/
             newVitals.put("weeksPregnant", viewModel.getWeeksPregnant().floatValue());
         }
-		
+
         ServiceResponse<List<VitalItem>> vitalServiceResponse = vitalService.createPatientEncounterVitalItems(newVitals, currentUser.getId(), patientEncounterItem.getId());
         if (vitalServiceResponse.hasErrors()) {
             throw new RuntimeException();
@@ -255,7 +255,7 @@ public class TriageController extends Controller {
 
         return redirect(routes.HistoryController.indexPatientGet(Integer.toString(patientServiceResponse.getResponseObject().getId())));
     }
-  //  public Result deletePatientPost(int patientId, int deleteByUserID){
+    //  public Result deletePatientPost(int patientId, int deleteByUserID){
     public Result deletePatientPost(int patientId){
         CurrentUser currentUser = sessionService.retrieveCurrentUserSession();
 
@@ -287,53 +287,72 @@ public class TriageController extends Controller {
         if (viewModelPost.getAge() != null) {
             patient.setBirth(viewModelPost.getAge());
             // added by gaby
-             if((viewModelPost.ageNumber(viewModelPost.getAge()) < 2) && (!viewModelPost.getAgeClassification().equals("infant")))
-             {
-                  throw new RuntimeException();
-             }
-             else if((viewModelPost.ageNumber(viewModelPost.getAge()) < 13) && (!viewModelPost.getAgeClassification().equals("child")))
-             {
-                   throw new RuntimeException();
-             }
-             else if((viewModelPost.ageNumber(viewModelPost.getAge()) < 18) && (!viewModelPost.getAgeClassification().equals("teen")))
-             {
-                  throw new RuntimeException();
-             }
-            else if((viewModelPost.ageNumber(viewModelPost.getAge()) < 65) && (!viewModelPost.getAgeClassification().equals("adult")))
-             {
-                	throw new RuntimeException();
-             }
-             else if((viewModelPost.ageNumber(viewModelPost.getAge()) >= 65) && (!viewModelPost.getAgeClassification().equals("elder")))
-             {
-                   	throw new RuntimeException();
-             }
-        }
-        patient.setSex(viewModelPost.getSex());
-        patient.setAddress(viewModelPost.getAddress());
-        patient.setCity(viewModelPost.getCity());
-
-        return patient;
-    }
-
-    private List<String> parseChiefComplaintsJSON(String chiefComplaint, String chiefComplaintJSON) {
-        List<String> chiefComplaints = new ArrayList<>();
-        //JSON chief complaints (multiple chief complaints - requires javascript)
-        //this won't happen if the multiple chief complaint
-        // feature is turned off (chiefComplaintJSON will be null)
-        if (StringUtils.isNotNullOrWhiteSpace(chiefComplaintJSON)) {
-
-            Gson gson = new Gson();
-            chiefComplaints = gson.fromJson(chiefComplaintJSON, new TypeToken<List<String>>() {
-            }.getType());
-
-        } else {
-            if (StringUtils.isNotNullOrWhiteSpace(chiefComplaint)) {
-                chiefComplaints.add(chiefComplaint);
+            //infant
+            if ((viewModelPost.ageNumber(viewModelPost.getAge()) >= 0) && (viewModelPost.ageNumber(viewModelPost.getAge()) < 2)) {
+                if (viewModelPost.getAgeClassification().equals("infant")) {
+                    viewModelPost.setAgeClassification(viewModelPost.getAgeClassification());
+                } else {
+                    throw new RuntimeException();
+                }
+            }
+            // child
+            else if ((viewModelPost.ageNumber(viewModelPost.getAge()) >= 2) && (viewModelPost.ageNumber(viewModelPost.getAge()) < 13)) {
+                if (viewModelPost.getAgeClassification().equals("child")) {
+                    viewModelPost.setAgeClassification(viewModelPost.getAgeClassification());
+                } else {
+                    throw new RuntimeException();
+                }
+            }
+            // teen
+            else if ((viewModelPost.ageNumber(viewModelPost.getAge()) >= 13) && (viewModelPost.ageNumber(viewModelPost.getAge()) < 18)) {
+                if (viewModelPost.getAgeClassification().equals("teen")) {
+                    viewModelPost.setAgeClassification(viewModelPost.getAgeClassification());
+                } else {
+                    throw new RuntimeException();
+                }
+            }
+            //adult
+            else if ((viewModelPost.ageNumber(viewModelPost.getAge()) >= 18) && (viewModelPost.ageNumber(viewModelPost.getAge()) < 65)) {
+                if (viewModelPost.getAgeClassification().equals("adult")) {
+                    viewModelPost.setAgeClassification(viewModelPost.getAgeClassification());
+                } else {
+                    throw new RuntimeException();
+                }
+            }
+            // elder
+            else if ((viewModelPost.ageNumber(viewModelPost.getAge()) >= 65)) {
+                if (viewModelPost.getAgeClassification().equals("elder")) {
+                    viewModelPost.setAgeClassification(viewModelPost.getAgeClassification());
+                } else {
+                    throw new RuntimeException();
+                }
             }
         }
+            patient.setSex(viewModelPost.getSex());
+            patient.setAddress(viewModelPost.getAddress());
+            patient.setCity(viewModelPost.getCity());
 
-        return chiefComplaints;
-    }
+            return patient;
+        }
+        private List<String> parseChiefComplaintsJSON(String chiefComplaint, String chiefComplaintJSON) {
+            List<String> chiefComplaints = new ArrayList<>();
+            //JSON chief complaints (multiple chief complaints - requires javascript)
+            //this won't happen if the multiple chief complaint
+            // feature is turned off (chiefComplaintJSON will be null)
+            if (StringUtils.isNotNullOrWhiteSpace(chiefComplaintJSON)) {
+
+                Gson gson = new Gson();
+                chiefComplaints = gson.fromJson(chiefComplaintJSON, new TypeToken<List<String>>() {
+                }.getType());
+
+            } else {
+                if (StringUtils.isNotNullOrWhiteSpace(chiefComplaint)) {
+                    chiefComplaints.add(chiefComplaint);
+                }
+            }
+
+            return chiefComplaints;
+        }
 
 //    //AJ Saclayan Cities
 //    public void editPost()
@@ -347,4 +366,4 @@ public class TriageController extends Controller {
 //                .filter(cityItem -> cityItem.getCityName() != null)
 //                .collect(Collectors.toList());
 //    }
-}
+    }
